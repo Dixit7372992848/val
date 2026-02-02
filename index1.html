@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will You Be My Valentine? 💖</title>
+
+<style>
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ffd6e8, #fff);
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  position: relative;
+  width: 320px;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+/* Buttons */
+button {
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+  margin-right: 10px;
+}
+
+#yes:hover {
+  transform: scale(1.1);
+}
+
+#no {
+  background: #ccc;
+  position: absolute;
+}
+
+/* GIF animation */
+#animeGif {
+  display: none;
+  width: 260px;
+  margin-top: 15px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  animation: pop 0.8s ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Final message */
+.yay {
+  display: none;
+  margin-top: 20px;
+  font-size: 22px;
+  color: #ff4d6d;
+  animation: fade 1s ease;
+}
+
+@keyframes fade {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+/* Mobile */
+@media(max-width:400px){
+  .card { width: 90%; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Will you be my Valentine? 💖</h1>
+
+  <button id="yes">Yes</button>
+  <button id="no">No</button>
+
+  <!-- 🔥 CHANGE GIF HERE -->
+  <!-- Option A: local file -> src="goku.gif" -->
+  <!-- Option B: online link -> paste URL -->
+  <img id="animeGif" src="https://i.makeagif.com/media/11-23-2021/rqRp9k.gif" alt="Cute moment">
+
+  <div class="yay" id="yay">
+    YAY!! 💕🥳  
+    <br><br>
+    Best decision ever 😌
+  </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const yay = document.getElementById("yay");
+const gif = document.getElementById("animeGif");
+const card = document.querySelector(".card");
+
+/* Initial No button position */
+noBtn.style.top = "70%";
+noBtn.style.left = "55%";
+
+/* Move NO button randomly */
+function moveNoButton() {
+  const rect = card.getBoundingClientRect();
+
+  const x = Math.random() * (rect.width - noBtn.offsetWidth);
+  const y = Math.random() * (rect.height - noBtn.offsetHeight);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("click", moveNoButton);
+
+/* YES click behavior */
+yesBtn.addEventListener("click", () => {
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+
+  gif.style.display = "block"; // show gif first
+
+  setTimeout(() => {
+    yay.style.display = "block"; // show message after
+  }, 3000);
+});
+</script>
+
+</body>
+</html>
